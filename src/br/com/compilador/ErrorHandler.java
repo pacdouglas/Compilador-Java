@@ -6,6 +6,6 @@ package br.com.compilador;
  * ser capaz de exibir um relatório formatado no final
  *
  */
-public class ErroHandler {
+public class ErrorHandler {
 
 }

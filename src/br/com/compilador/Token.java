@@ -8,5 +8,25 @@ package br.com.compilador;
 
 
 public class Token {
-
+	private String lexema;
+	private TokenTipo tipoToken;
+	
+	public Token(String lexema, TokenTipo tipoToken) {
+		super();
+		this.lexema = lexema;
+		this.tipoToken = tipoToken;
+	}
+	
+	public String getLexema() {
+		return lexema;
+	}
+	public void setLexema(String lexema) {
+		this.lexema = lexema;
+	}
+	public TokenTipo getTipoToken() {
+		return tipoToken;
+	}
+	public void setTipoToken(TokenTipo tipoToken) {
+		this.tipoToken = tipoToken;
+	}
 }

@@ -8,5 +8,5 @@ package br.com.compilador;
 */
 
 public class AnLexico {
-
+	
 }
