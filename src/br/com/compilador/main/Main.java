@@ -2,9 +2,7 @@ package br.com.compilador.main;
 
 import java.io.IOException;
 
-import br.com.compilador.TabSimbolos;
-import br.com.compilador.Token;
-import br.com.compilador.TokenTipo;
+import br.com.compilador.AnSintatico;
 
 public class Main {
 
@@ -19,8 +17,8 @@ public class Main {
 			System.out.println(t+" "+teste.getElement());
 		}
 		
-		
-		
+		AnSintatico anSintatico = new AnSintatico("arquivo.txt");
+		anSintatico.executar();
 	}
 
 }

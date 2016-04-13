@@ -23,14 +23,14 @@ public class FileLoader {
 
 	public final int EOF_CHAR = -1;
 
-	// Construtor
+	
 	public FileLoader(String path) throws IOException {
 		this.linha = 1;
 		this.coluna = 0;
 		this.buffer = new BufferedReader(new FileReader(path));
 	}
 
-	// Retorna o proximo char
+
 	public char getNextChar() throws IOException {
 		this.buffer.mark(1);
 		int aux = this.buffer.read();
@@ -45,7 +45,7 @@ public class FileLoader {
 		return result;
 	}
 
-	// Controla contadores das linhas e colunas
+	
 	public void controlLineColumn(char c) {
 		if (this.finalLinha) {
 			this.linha++;
@@ -61,17 +61,14 @@ public class FileLoader {
 		this.coluna++;
 	}
 
-	// Retorna Linha Atual
 	public int getLine() {
 		return linha;
 	}
 
-	// Retorna Coluna Atual
 	public int getColumn() {
 		return coluna;
 	}
 
-	// Retornar o elemento atual em String
 	public String getElement() {
 		return "[" + this.getLine() + "," + this.getColumn() + "]";
 	}

@@ -12,12 +12,25 @@ package br.com.compilador;
  * 
  */
 
+import java.io.IOException;
+
 public class AnSintatico {
 	AnLexico anLexico;
-	Token token;
+	
+	public AnSintatico(String path) throws IOException{
+		anLexico = new AnLexico(path); 
+	}
 	
 	public void executar(){
+		Token token = null;
 		
+		do{
+			System.out.println(token.getLexema());
+			System.out.println(token.getTipoToken());
+			System.out.println(token.getLinha());
+			System.out.println(token.getColuna());
+			System.out.println(token.getTipoToken());
+		}while(true);
 	}
 	
 }
