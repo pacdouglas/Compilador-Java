@@ -2,7 +2,6 @@ package br.com.compilador;
 
 import java.util.ArrayList;
 
-
 /*
  * tratador de erros. 
  * Em geral, deve manter registro de todos os erros 
@@ -27,22 +26,23 @@ public class ErrorHandler {
 	}
 	
 	public void printErros(){
-		if(listError.size() > 0){
-			System.out.println("==================================================");
-			System.out.println("                   Erros encontrados");
-			System.out.println("==================================================");
+		System.out.println("");
+		System.out.println("***************************");
+		System.out.println("    Erros Encontrados");
+		if(listError.isEmpty()){
+			System.out.println("***************************");
+			System.out.println("   Nenhum Erro Encontrado!");
+			System.out.println("***************************");
+		}else{
 			for (Erro erro : listError) {
-				System.out.println("Tipo do erro: " + erro.getErroTipo());
-	            System.out.println("Lexema: " + erro.getLexema());
-	            System.out.println("Linha: " + erro.getLinha());
-	            System.out.println("Coluna: "+erro.getColuna());
-	            System.out.println("Descrição: " + erro.getDescricao());
-	            System.out.println("==================================================");
+				System.out.println("***************************");
+				System.out.println("Lexema: "+erro.getLexema());
+				System.out.println("Tipo Erro: "+erro.getErroTipo());
+				System.out.println("Linha: "+erro.getLinha());
+				System.out.println("Coluna: "+erro.getColuna());
+				System.out.println("Descrição: "+erro.getDescricao());
 			}
-		}else {
-			System.out.println("==================================================");
-			System.out.println("            Nenhum Erro foi encontrado ");
-			System.out.println("==================================================");
+			System.out.println("***************************");
 		}
 	}
 }	

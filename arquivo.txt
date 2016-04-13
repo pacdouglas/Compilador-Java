@@ -1,3 +1,25 @@
-teste
-teste2
-teste3
+:=
+$gt$
+$l
+'batata'
+'fei jaoa'
+'
++
+123.123E++akjsdhasjkd 
+123.123E+10
+123E+12
+-
+*
+/
+?
+teste 265.lkiasdasdasdww
+true
+2
+false
+45566
+&
+12331.5
+123.321
+_teste2
+begin
+:[Comment]:

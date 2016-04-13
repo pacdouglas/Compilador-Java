@@ -27,7 +27,8 @@ public enum TokenTipo {
 	WHILE(23),
 	DECLARE(24),
 	TO(25),
-	EOF(26);
+	EOF(26),
+	ERROR(27);
 	
 	private int id;
 	

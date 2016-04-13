@@ -16,21 +16,28 @@ import java.io.IOException;
 
 public class AnSintatico {
 	AnLexico anLexico;
+	private Token token;
 	
 	public AnSintatico(String path) throws IOException{
 		anLexico = new AnLexico(path); 
 	}
 	
 	public void executar(){
-		Token token = null;
-		
+		System.out.println("=========================");
+		System.out.println("     Analixador Léxico");
+		System.out.println("=========================");
 		do{
-			System.out.println(token.getLexema());
-			System.out.println(token.getTipoToken());
-			System.out.println(token.getLinha());
-			System.out.println(token.getColuna());
-			System.out.println(token.getTipoToken());
-		}while(true);
+			token = anLexico.nextToken();
+			if(token.getTipoToken()!=TokenTipo.ERROR){
+				System.out.println("Lexema: "+token.getLexema());
+				System.out.println("Tipo Token: "+token.getTipoToken());
+				if(token.getTipoToken()!=TokenTipo.EOF){
+					System.out.println("Linha: "+token.getLinha());
+					System.out.println("Coluna: "+token.getColuna());
+				}
+				System.out.println("=========================");
+			}
+		}while(token.getTipoToken()!=TokenTipo.EOF);
 	}
 	
 }
