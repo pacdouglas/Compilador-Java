@@ -2,7 +2,9 @@ package br.com.compilador.main;
 
 import java.io.IOException;
 
+import br.com.compilador.AnLexico;
 import br.com.compilador.AnSintatico;
+import br.com.compilador.Token;
 
 public class Main {
 
@@ -17,8 +19,16 @@ public class Main {
 			System.out.println(t+" "+teste.getElement());
 		}
 		
-		AnSintatico anSintatico = new AnSintatico("arquivo.txt");
-		anSintatico.executar();
+		
+		
+		AnLexico anLexico = new AnLexico("arquivo.txt");
+		Token teste5 = anLexico.nextToken();
+		
+		System.out.println(teste5.getLexema());
+		System.out.println(teste5.getTipoToken());
+		System.out.println(teste5.getLinha());
+		System.out.println(teste5.getColuna());
+
 	}
 
 }
