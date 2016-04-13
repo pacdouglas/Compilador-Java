@@ -13,5 +13,11 @@ package br.com.compilador;
  */
 
 public class AnSintatico {
-
+	AnLexico anLexico;
+	Token token;
+	
+	public void executar(){
+		
+	}
+	
 }

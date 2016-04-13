@@ -1,6 +1,7 @@
 package br.com.compilador.main;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,9 +17,11 @@ public class FileLoader {
 
 	private int linha;
 	private int coluna;
-	private int ultimaColuna;
+	private int lineBreak;
 
 	private boolean finalLinha = false;
+
+	public final int EOF_CHAR = -1;
 
 	// Construtor
 	public FileLoader(String path) throws IOException {
@@ -26,13 +29,20 @@ public class FileLoader {
 		this.coluna = 0;
 		this.buffer = new BufferedReader(new FileReader(path));
 	}
-	
+
 	// Retorna o proximo char
 	public char getNextChar() throws IOException {
 		this.buffer.mark(1);
-		char aux = (char) this.buffer.read();
-		this.controlLineColumn(aux);
-		return aux;
+		int aux = this.buffer.read();
+
+		if (aux == EOF_CHAR) {
+			throw new EOFException();
+		}
+		char result = (char) aux;
+
+		this.controlLineColumn(result);
+
+		return result;
 	}
 
 	// Controla contadores das linhas e colunas
@@ -42,9 +52,9 @@ public class FileLoader {
 			this.coluna = 0;
 			this.finalLinha = false;
 		}
-		
+
 		this.setUltimaColuna(this.coluna);
-		
+
 		if (c == '\n') {
 			this.finalLinha = true;
 		}
@@ -67,11 +77,15 @@ public class FileLoader {
 	}
 
 	public int getUltimaColuna() {
-		return ultimaColuna;
+		return lineBreak;
 	}
 
 	public void setUltimaColuna(int ultimaColuna) {
-		this.ultimaColuna = ultimaColuna;
+		this.lineBreak = ultimaColuna;
+	}
+
+	public void rollbackChar() throws IOException {
+		buffer.reset();
 	}
 
 }

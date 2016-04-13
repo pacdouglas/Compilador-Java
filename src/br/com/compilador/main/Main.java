@@ -9,7 +9,7 @@ import br.com.compilador.TokenTipo;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		FileLoader teste = new FileLoader("C:\\Users\\dougl\\workspace\\Compilador-Java\\arquivo.txt");
+		FileLoader teste = new FileLoader("arquivo.txt");
 		
 		
 		char t = teste.getNextChar();
@@ -19,14 +19,8 @@ public class Main {
 			System.out.println(t+" "+teste.getElement());
 		}
 		
-		Token teste2 = new Token("Lexema", TokenTipo.BEGIN);
 		
-		System.out.println(teste2.getLexema());
-		System.out.println(teste2.getTipoToken());
 		
-		TabSimbolos teste3 = TabSimbolos.getInstance();
-		
-		teste3.printTable();
 	}
 
 }

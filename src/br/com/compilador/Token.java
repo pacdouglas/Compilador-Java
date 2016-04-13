@@ -10,7 +10,15 @@ package br.com.compilador;
 public class Token {
 	private String lexema;
 	private TokenTipo tipoToken;
+	private int linha, coluna;
 	
+	public Token(String lexema, TokenTipo tipoToken, int linha, int coluna) {
+		this.lexema = lexema;
+		this.tipoToken = tipoToken;
+		this.linha = linha;
+		this.coluna = coluna;
+	}
+
 	public Token(String lexema, TokenTipo tipoToken) {
 		super();
 		this.lexema = lexema;
@@ -29,4 +37,21 @@ public class Token {
 	public void setTipoToken(TokenTipo tipoToken) {
 		this.tipoToken = tipoToken;
 	}
+
+	public int getLinha() {
+		return linha;
+	}
+
+	public void setLinha(int linha) {
+		this.linha = linha;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
+	}
+	
 }

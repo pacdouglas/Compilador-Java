@@ -8,31 +8,32 @@ import java.util.HashMap;
  *  (preferencialmente, um Singleton) 
  */
 
-@SuppressWarnings("serial")
+
 public class TabSimbolos extends HashMap<String, Token>{
+	private static final long serialVersionUID = 1L;
 	private static TabSimbolos uniqueInstance;
 	
 	private TabSimbolos(){
-		this.configPalavraReservada(new Token("true", TokenTipo.LOGIC_VAL));
-		this.configPalavraReservada(new Token("false", TokenTipo.LOGIC_VAL));
-		this.configPalavraReservada(new Token("not", TokenTipo.LOGIC_OP));
-		this.configPalavraReservada(new Token("and", TokenTipo.LOGIC_OP));
-		this.configPalavraReservada(new Token("or", TokenTipo.LOGIC_OP));
-		this.configPalavraReservada(new Token("bool", TokenTipo.TYPE));
-		this.configPalavraReservada(new Token("text", TokenTipo.TYPE));
-		this.configPalavraReservada(new Token("int", TokenTipo.TYPE));
-		this.configPalavraReservada(new Token("float", TokenTipo.TYPE));
-		this.configPalavraReservada(new Token("program", TokenTipo.PROGRAM));
-		this.configPalavraReservada(new Token("end_prog", TokenTipo.END_PROGRAM));
-		this.configPalavraReservada(new Token("begin", TokenTipo.BEGIN));
-		this.configPalavraReservada(new Token("end", TokenTipo.END));
-		this.configPalavraReservada(new Token("if", TokenTipo.IF));
-		this.configPalavraReservada(new Token("then", TokenTipo.THEN));
-		this.configPalavraReservada(new Token("else", TokenTipo.ELSE));
-		this.configPalavraReservada(new Token("for", TokenTipo.FOR));
-		this.configPalavraReservada(new Token("while", TokenTipo.WHILE));
-		this.configPalavraReservada(new Token("declare", TokenTipo.DECLARE));
-		this.configPalavraReservada(new Token("to", TokenTipo.TO));
+		this.configTabelaSimbolos(new Token("true", TokenTipo.LOGIC_VAL));
+		this.configTabelaSimbolos(new Token("false", TokenTipo.LOGIC_VAL));
+		this.configTabelaSimbolos(new Token("not", TokenTipo.LOGIC_OP));
+		this.configTabelaSimbolos(new Token("and", TokenTipo.LOGIC_OP));
+		this.configTabelaSimbolos(new Token("or", TokenTipo.LOGIC_OP));
+		this.configTabelaSimbolos(new Token("bool", TokenTipo.TYPE));
+		this.configTabelaSimbolos(new Token("text", TokenTipo.TYPE));
+		this.configTabelaSimbolos(new Token("int", TokenTipo.TYPE));
+		this.configTabelaSimbolos(new Token("float", TokenTipo.TYPE));
+		this.configTabelaSimbolos(new Token("program", TokenTipo.PROGRAM));
+		this.configTabelaSimbolos(new Token("end_prog", TokenTipo.END_PROGRAM));
+		this.configTabelaSimbolos(new Token("begin", TokenTipo.BEGIN));
+		this.configTabelaSimbolos(new Token("end", TokenTipo.END));
+		this.configTabelaSimbolos(new Token("if", TokenTipo.IF));
+		this.configTabelaSimbolos(new Token("then", TokenTipo.THEN));
+		this.configTabelaSimbolos(new Token("else", TokenTipo.ELSE));
+		this.configTabelaSimbolos(new Token("for", TokenTipo.FOR));
+		this.configTabelaSimbolos(new Token("while", TokenTipo.WHILE));
+		this.configTabelaSimbolos(new Token("declare", TokenTipo.DECLARE));
+		this.configTabelaSimbolos(new Token("to", TokenTipo.TO));
 		
 	}
 	
@@ -43,23 +44,21 @@ public class TabSimbolos extends HashMap<String, Token>{
 		return uniqueInstance;
 	}
 	
-	public void configPalavraReservada(Token token){
+	public void configTabelaSimbolos(Token token){
 		this.put(token.getLexema(), token);
 	}
 	
-	public void printTable(){
-		System.out.println("===========================================");
-		System.out.println("    Tabela Simbolos (TabSimbolos.class) ");
-		System.out.println("===========================================");
-		System.out.println("==LEXEMA== ==TOKEN==");
-		for(Entry<String, Token> entry : getInstance().entrySet()){
-			String key = entry.getKey();
-			Token value = entry.getValue();
-			
-			System.out.println(value.getLexema()+" | "+value.getTipoToken());
-			System.out.println("_________________________________________");
+	public Token instalaToken(String lexema, int linha, int coluna){
+		Token token = null;
+		
+		if(TabSimbolos.getInstance().containsKey(lexema)){
+			token = TabSimbolos.getInstance().get(lexema);
+			token.setLinha(linha);
+			token.setColuna(coluna);
+		}else{
+			token = new Token(lexema, TokenTipo.ID, linha, coluna);
+			configTabelaSimbolos(token);
 		}
-		System.out.println("===========================================");
+		return token;
 	}
-	
 }
