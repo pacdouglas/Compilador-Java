@@ -211,7 +211,7 @@ public class AnLexico {
 		if (validar == false && c == 'e') {
 			this.lexema.append(c);
 			c = buffer.getNextChar();
-			if (c == 'd') {
+			if (c == 'q') {
 				this.lexema.append(c);
 				c = buffer.getNextChar();
 				if (c == '$') {
@@ -237,8 +237,15 @@ public class AnLexico {
 		}
 
 		if (validar == false) {
+			while(c!='\r'){
+				this.lexema.append(c);
+				c = buffer.getNextChar();
+				if(Character.isWhitespace(c)){
+					break;
+				}
+			}
 			ErrorHandler.getInstance().gravaErro(
-					new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Aguardando fechamento com $"));
+					new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Operador Relacional Inválido"));
 			tkRelOp = new Token("Error", TokenTipo.ERROR);
 		}
 

@@ -76,14 +76,13 @@ public class TabSimbolos extends HashMap<String, Token> {
 		System.out.println("      Tabela de Simbolos");
 		System.out.println("##############################");
 		for (Entry<String, Token> entry : getInstance().entrySet()) {
-			String key = entry.getKey();
-			Token value = entry.getValue();
-
-			System.out.println("Lexema: " + entry.getValue().getLexema());
-			System.out.println("Tipo Token: " + entry.getValue().getTipoToken());
-			System.out.println("Linha: " + entry.getValue().getLinha());
-			System.out.println("Coluna: " + entry.getValue().getColuna());
-			System.out.println("##############################");
+			if(entry.getValue().getLinha()!=0 && entry.getValue().getColuna()!=0){
+				System.out.println("Lexema: " + entry.getValue().getLexema());
+				System.out.println("Tipo Token: " + entry.getValue().getTipoToken());
+				System.out.println("Linha: " + entry.getValue().getLinha());
+				System.out.println("Coluna: " + entry.getValue().getColuna());
+				System.out.println("##############################");
+			}
 		}
 	}
 }

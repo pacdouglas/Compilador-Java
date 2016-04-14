@@ -9,6 +9,17 @@
 :[Comment]:
 'Batata' 'Cebo la' 'testando som 123 testando som' ' teste '
 :[Comment]blabla:
+$lt$ 
+$gt$ 
+$ge$
+:[Comment]:
+$le$ 
+:[Comment]:
+$eq$ 
+:[Comment]:
+$df$
+$eu$
+$blablabla123$
 val _salario
 vai__
 variavelcomfalsenonome
@@ -21,7 +32,7 @@ false_no_nome_da_variavel
 :=
 :
 =
-:[Comment]:
+:[Comment123blablabla]:
 ;
 :[Comment]:
 ()
