@@ -25,7 +25,7 @@ public class Main {
 		anSintatico.executar();
 
 		ErrorHandler.getInstance().printErros();
-		
+
 		TabSimbolos.getInstance().printToken();
 	}
 

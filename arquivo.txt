@@ -45,3 +45,6 @@ end_prog
 begin end if then else for while declare to+2
 int soma := 3+2;
 a
+while(10$eq$10) then
+a:=10.000e+1234
+end

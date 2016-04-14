@@ -130,15 +130,16 @@ public class AnLexico {
 				if (c == ':') {
 					lexema.append(c);
 					break;
-				}else{
-					while(c!='\r'){
+				} else {
+					while (c != '\r') {
 						c = buffer.getNextChar();
-						if(Character.isWhitespace(c)){
+						if (Character.isWhitespace(c)) {
 							break;
 						}
 						lexema.append(c);
 					}
-					ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Fechamento Inválido do Comentário. Aguardando ]:"));
+					ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha,
+							this.coluna, "Fechamento Inválido do Comentário. Aguardando ]:"));
 					break;
 				}
 			}
@@ -237,15 +238,15 @@ public class AnLexico {
 		}
 
 		if (validar == false) {
-			while(c!='\r'){
+			while (c != '\r') {
 				this.lexema.append(c);
 				c = buffer.getNextChar();
-				if(Character.isWhitespace(c)){
+				if (Character.isWhitespace(c)) {
 					break;
 				}
 			}
-			ErrorHandler.getInstance().gravaErro(
-					new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Operador Relacional Inválido"));
+			ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna,
+					"Operador Relacional Inválido"));
 			tkRelOp = new Token("Error", TokenTipo.ERROR);
 		}
 
@@ -345,13 +346,13 @@ public class AnLexico {
 				c = buffer.getNextChar();
 			}
 			if (!Util.isDigit(c) && !firstTime) {
-				while(c!='\r'){
+				while (c != '\r') {
 					this.lexema.append(c);
 					c = buffer.getNextChar();
-					if(Character.isWhitespace(c)){
+					if (Character.isWhitespace(c)) {
 						throw new EOFException();
 					}
-					if(c=='\n'){
+					if (c == '\n') {
 						throw new EOFException();
 					}
 				}
