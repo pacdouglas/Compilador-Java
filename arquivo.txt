@@ -1,25 +1,36 @@
-:=
-$gt$
-$l
-'batata'
-'fei jaoa'
-'
-+
-123.123E++akjsdhasjkd 
-123.123E+10
-123E+12
--
-*
-/
-?
-teste 265.lkiasdasdasdww
-true
-2
-false
-45566
-&
-12331.5
-123.321
-_teste2
-begin
+123
+55555555555555555555555555 5
+48 3E+10
+3E+asd15d
+:[Comment]22:
+4.8 3.10E+10
+3.10E+jasdh892laksj
+'Carlos'
 :[Comment]:
+'Batata' 'Cebo la' 'testando som 123 testando som' ' teste '
+:[Comment]blabla:
+val _salario
+vai__
+variavelcomfalsenonome
+variavelcomtruenonome
+truenonomedavariavel
+false_no_nome_da_variavel
++ - *
+/
+{ } ! @ # $ % ¨ & * 
+:=
+:
+=
+:[Comment]:
+;
+:[Comment]:
+()
+true false
+and not or
+bool text int
+program
+end_prog
+:[Comment]:
+begin end if then else for while declare to+2
+int soma := 3+2;
+a

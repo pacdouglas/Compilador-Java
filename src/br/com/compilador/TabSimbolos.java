@@ -1,3 +1,12 @@
+/*
+ * Nome Alunos:
+ * Douglas Martins
+ * José Ricardo Zanardo Junior
+ * Rafael Madeira Medeiros Anjos
+ * Rhamah Nemezio
+ * 
+ */
+
 package br.com.compilador;
 
 import java.util.HashMap;
@@ -8,12 +17,11 @@ import java.util.HashMap;
  *  (preferencialmente, um Singleton) 
  */
 
-
-public class TabSimbolos extends HashMap<String, Token>{
+public class TabSimbolos extends HashMap<String, Token> {
 	private static final long serialVersionUID = 1L;
 	private static TabSimbolos uniqueInstance;
-	
-	private TabSimbolos(){
+
+	private TabSimbolos() {
 		this.configTabelaSimbolos(new Token("true", TokenTipo.LOGIC_VAL));
 		this.configTabelaSimbolos(new Token("false", TokenTipo.LOGIC_VAL));
 		this.configTabelaSimbolos(new Token("not", TokenTipo.LOGIC_OP));
@@ -34,28 +42,28 @@ public class TabSimbolos extends HashMap<String, Token>{
 		this.configTabelaSimbolos(new Token("while", TokenTipo.WHILE));
 		this.configTabelaSimbolos(new Token("declare", TokenTipo.DECLARE));
 		this.configTabelaSimbolos(new Token("to", TokenTipo.TO));
-		
+
 	}
-	
-	public static synchronized TabSimbolos getInstance(){
-		if(uniqueInstance == null){
+
+	public static synchronized TabSimbolos getInstance() {
+		if (uniqueInstance == null) {
 			uniqueInstance = new TabSimbolos();
 		}
 		return uniqueInstance;
 	}
-	
-	public void configTabelaSimbolos(Token token){
+
+	public void configTabelaSimbolos(Token token) {
 		this.put(token.getLexema(), token);
 	}
-	
-	public Token instalaToken(String lexema, int linha, int coluna){
+
+	public Token instalaToken(String lexema, int linha, int coluna) {
 		Token token = null;
-		
-		if(TabSimbolos.getInstance().containsKey(lexema)){
+
+		if (TabSimbolos.getInstance().containsKey(lexema)) {
 			token = TabSimbolos.getInstance().get(lexema);
 			token.setLinha(linha);
 			token.setColuna(coluna);
-		}else{
+		} else {
 			token = new Token(lexema, TokenTipo.ID, linha, coluna);
 			configTabelaSimbolos(token);
 		}

@@ -1,3 +1,11 @@
+/*
+ * Nome Alunos:
+ * Douglas Martins
+ * José Ricardo Zanardo Junior
+ * Rafael Madeira Medeiros Anjos
+ * Rhamah Nemezio
+ * 
+ */
 package br.com.compilador;
 
 import java.io.EOFException;
@@ -57,7 +65,7 @@ public class AnLexico {
 				if (caractere == '[') {
 					buffer.rollbackChar();
 					this.descartaComentario();
-					tk = this.processa();
+					tk = new Token("Comentário", TokenTipo.ERROR);
 				} else {
 					buffer.rollbackChar();
 					tk = this.tokenAttribOp();
@@ -117,9 +125,20 @@ public class AnLexico {
 			c = buffer.getNextChar();
 			lexema.append(c);
 			if (c == ']') {
+				c = buffer.getNextChar();
 				lexema.append(c);
 				if (c == ':') {
 					lexema.append(c);
+					break;
+				}else{
+					while(c!='\r'){
+						c = buffer.getNextChar();
+						if(Character.isWhitespace(c)){
+							break;
+						}
+						lexema.append(c);
+					}
+					ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Fechamento Inválido do Comentário. Aguardando ]:"));
 					break;
 				}
 			}
@@ -138,7 +157,8 @@ public class AnLexico {
 					tkLiteral = new Token(this.lexema.toString(), TokenTipo.LITERAL, this.linha, this.coluna);
 					achou = true;
 					break;
-				}if(c=='\r'||c=='\n'){
+				}
+				if (c == '\r' || c == '\n') {
 					break;
 				}
 			}
@@ -146,8 +166,8 @@ public class AnLexico {
 				throw new EOFException();
 			}
 		} catch (EOFException e) {
-			ErrorHandler.getInstance().gravaErro(new Erro("Caractere Inválido", "'", this.linha,
-					this.coluna, "Aguardando a aspa de fechamento"));
+			ErrorHandler.getInstance().gravaErro(
+					new Erro("Caractere Inválido", "'", this.linha, this.coluna, "Aguardando a aspa de fechamento"));
 			tkLiteral = new Token(this.lexema.toString(), TokenTipo.ERROR);
 		}
 
@@ -159,68 +179,69 @@ public class AnLexico {
 		char c;
 		c = buffer.getNextChar();
 		boolean validar = false;
-		
-		if(c=='g'){
+
+		if (c == 'g') {
 			this.lexema.append(c);
 			c = buffer.getNextChar();
-			if(c=='t' || c=='e'){
+			if (c == 't' || c == 'e') {
 				this.lexema.append(c);
-				c=buffer.getNextChar();
-				if(c=='$'){
+				c = buffer.getNextChar();
+				if (c == '$') {
 					this.lexema.append(c);
 					tkRelOp = new Token(this.lexema.toString(), TokenTipo.REL_OP, this.linha, this.coluna);
-					validar=true;
+					validar = true;
 				}
 			}
 		}
-		
-		if(validar==false && c=='l'){
+
+		if (validar == false && c == 'l') {
 			this.lexema.append(c);
 			c = buffer.getNextChar();
-			if(c=='t' || c=='e'){
+			if (c == 't' || c == 'e') {
 				this.lexema.append(c);
-				c=buffer.getNextChar();
-				if(c=='$'){
+				c = buffer.getNextChar();
+				if (c == '$') {
 					this.lexema.append(c);
 					tkRelOp = new Token(this.lexema.toString(), TokenTipo.REL_OP, this.linha, this.coluna);
-					validar=true;
+					validar = true;
 				}
 			}
 		}
-		
-		if(validar==false && c=='e'){
+
+		if (validar == false && c == 'e') {
 			this.lexema.append(c);
 			c = buffer.getNextChar();
-			if(c=='d'){
+			if (c == 'd') {
 				this.lexema.append(c);
-				c=buffer.getNextChar();
-				if(c=='$'){
+				c = buffer.getNextChar();
+				if (c == '$') {
 					this.lexema.append(c);
 					tkRelOp = new Token(this.lexema.toString(), TokenTipo.REL_OP, this.linha, this.coluna);
-					validar=true;
+					validar = true;
 				}
 			}
 		}
-		
-		if(validar==false && c=='d'){
+
+		if (validar == false && c == 'd') {
 			this.lexema.append(c);
 			c = buffer.getNextChar();
-			if(c=='f'){
+			if (c == 'f') {
 				this.lexema.append(c);
-				c=buffer.getNextChar();
-				if(c=='$'){
+				c = buffer.getNextChar();
+				if (c == '$') {
 					this.lexema.append(c);
 					tkRelOp = new Token(this.lexema.toString(), TokenTipo.REL_OP, this.linha, this.coluna);
-					validar=true;
+					validar = true;
 				}
 			}
 		}
-		
-		if(validar==false){
-			ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Aguardando fechamento com $"));
+
+		if (validar == false) {
+			ErrorHandler.getInstance().gravaErro(
+					new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna, "Aguardando fechamento com $"));
 			tkRelOp = new Token("Error", TokenTipo.ERROR);
 		}
-		
+
 		return tkRelOp;
 	}
 
@@ -317,7 +338,16 @@ public class AnLexico {
 				c = buffer.getNextChar();
 			}
 			if (!Util.isDigit(c) && !firstTime) {
-				this.lexema.append(c);
+				while(c!='\r'){
+					this.lexema.append(c);
+					c = buffer.getNextChar();
+					if(Character.isWhitespace(c)){
+						throw new EOFException();
+					}
+					if(c=='\n'){
+						throw new EOFException();
+					}
+				}
 				throw new EOFException();
 			}
 

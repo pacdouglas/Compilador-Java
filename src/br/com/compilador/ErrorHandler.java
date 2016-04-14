@@ -1,3 +1,11 @@
+/*
+ * Nome Alunos:
+ * Douglas Martins
+ * José Ricardo Zanardo Junior
+ * Rafael Madeira Medeiros Anjos
+ * Rhamah Nemezio
+ * 
+ */
 package br.com.compilador;
 
 import java.util.ArrayList;
@@ -12,37 +20,37 @@ import java.util.ArrayList;
 public class ErrorHandler {
 	public static ErrorHandler instance = new ErrorHandler();
 	private ArrayList<Erro> listError = new ArrayList<Erro>();
-	
-	private ErrorHandler(){
+
+	private ErrorHandler() {
 		listError = new ArrayList<>();
 	}
-	
+
 	public static ErrorHandler getInstance() {
 		return ErrorHandler.instance;
 	}
-	
-	public void gravaErro(Erro erro){
+
+	public void gravaErro(Erro erro) {
 		listError.add(erro);
 	}
-	
-	public void printErros(){
+
+	public void printErros() {
 		System.out.println("");
 		System.out.println("***************************");
 		System.out.println("    Erros Encontrados");
-		if(listError.isEmpty()){
+		if (listError.isEmpty()) {
 			System.out.println("***************************");
 			System.out.println("   Nenhum Erro Encontrado!");
 			System.out.println("***************************");
-		}else{
+		} else {
 			for (Erro erro : listError) {
 				System.out.println("***************************");
-				System.out.println("Lexema: "+erro.getLexema());
-				System.out.println("Tipo Erro: "+erro.getErroTipo());
-				System.out.println("Linha: "+erro.getLinha());
-				System.out.println("Coluna: "+erro.getColuna());
-				System.out.println("Descrição: "+erro.getDescricao());
+				System.out.println("Lexema: " + erro.getLexema());
+				System.out.println("Tipo Erro: " + erro.getErroTipo());
+				System.out.println("Linha: " + erro.getLinha());
+				System.out.println("Coluna: " + erro.getColuna());
+				System.out.println("Descrição: " + erro.getDescricao());
 			}
 			System.out.println("***************************");
 		}
 	}
-}	
+}

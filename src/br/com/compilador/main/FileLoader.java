@@ -1,9 +1,19 @@
+/*
+ * Nome Alunos:
+ * Douglas Martins
+ * José Ricardo Zanardo Junior
+ * Rafael Madeira Medeiros Anjos
+ * Rhamah Nemezio
+ * 
+ */
 package br.com.compilador.main;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import br.com.compilador.Util;
 
 /*
  *  classe usada pelo AnLexico, 
@@ -23,29 +33,31 @@ public class FileLoader {
 
 	public final int EOF_CHAR = -1;
 
-	
+	private static char lastChar;
+
 	public FileLoader(String path) throws IOException {
 		this.linha = 1;
 		this.coluna = 0;
 		this.buffer = new BufferedReader(new FileReader(path));
 	}
 
-
 	public char getNextChar() throws IOException {
 		this.buffer.mark(1);
 		int aux = this.buffer.read();
 
-		if (aux == EOF_CHAR) {
+		if (aux == EOF_CHAR && !Util.isDigit(FileLoader.getLastChar()) && !Util.isLetter(FileLoader.getLastChar())){
 			throw new EOFException();
 		}
+		
 		char result = (char) aux;
 
 		this.controlLineColumn(result);
-
+		
+		FileLoader.setLastChar(result);
+		
 		return result;
 	}
 
-	
 	public void controlLineColumn(char c) {
 		if (this.finalLinha) {
 			this.linha++;
@@ -85,4 +97,11 @@ public class FileLoader {
 		buffer.reset();
 	}
 
+	public static char getLastChar() {
+		return lastChar;
+	}
+
+	public static void setLastChar(char lastChar) {
+		FileLoader.lastChar = lastChar;
+	}
 }

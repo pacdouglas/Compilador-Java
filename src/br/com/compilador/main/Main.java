@@ -1,3 +1,12 @@
+/*
+ * Nome Alunos:
+ * Douglas Martins
+ * José Ricardo Zanardo Junior
+ * Rafael Madeira Medeiros Anjos
+ * Rhamah Nemezio
+ * 
+ */
+
 package br.com.compilador.main;
 
 import java.io.IOException;
