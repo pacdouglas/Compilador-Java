@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import br.com.compilador.AnSintatico;
 import br.com.compilador.ErrorHandler;
+import br.com.compilador.TabSimbolos;
 
 public class Main {
 
@@ -24,6 +25,8 @@ public class Main {
 		anSintatico.executar();
 
 		ErrorHandler.getInstance().printErros();
+		
+		TabSimbolos.getInstance().printToken();
 	}
 
 }
