@@ -20,13 +20,14 @@ public class Main {
 	private static AnSintatico anSintatico;
 
 	public static void main(String[] args) throws IOException {
-		anSintatico = new AnSintatico("Arquivo.txt");
+		anSintatico = new AnSintatico("arquivo.txt");
 
 		anSintatico.executar();
 
 		ErrorHandler.getInstance().printErros();
 
 		TabSimbolos.getInstance().printToken();
+		System.out.println("Fim");
 	}
 
 }
