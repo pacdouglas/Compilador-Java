@@ -20,7 +20,7 @@ public class Main {
 	private static AnSintatico anSintatico;
 
 	public static void main(String[] args) throws IOException {
-		anSintatico = new AnSintatico("arquivo.txt");
+		anSintatico = new AnSintatico("Arquivo.txt");
 
 		anSintatico.executar();
 
