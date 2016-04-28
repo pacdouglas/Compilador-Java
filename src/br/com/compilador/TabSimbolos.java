@@ -59,8 +59,8 @@ public class TabSimbolos extends HashMap<String, Token> {
 	public Token instalaToken(String lexema, int linha, int coluna) {
 		Token token = null;
 
-		if (TabSimbolos.getInstance().containsKey(lexema)) {
-			token = TabSimbolos.getInstance().get(lexema);
+		if (containsKey(lexema)) {
+			token = get(lexema);
 			token.setLinha(linha);
 			token.setColuna(coluna);
 		} else {
@@ -75,7 +75,7 @@ public class TabSimbolos extends HashMap<String, Token> {
 		System.out.println("##############################");
 		System.out.println("      Tabela de Simbolos");
 		System.out.println("##############################");
-		for (Entry<String, Token> entry : getInstance().entrySet()) {
+		for (Entry<String, Token> entry : entrySet()) {
 			if (entry.getValue().getLinha() != 0 && entry.getValue().getColuna() != 0) {
 				System.out.println("Lexema: " + entry.getValue().getLexema());
 				System.out.println("Tipo Token: " + entry.getValue().getTipoToken());

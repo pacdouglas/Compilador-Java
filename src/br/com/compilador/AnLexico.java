@@ -45,8 +45,12 @@ public class AnLexico {
 
 	private Token processa() throws EOFException, IOException {
 		Token tk = null;
-
-		char caractere = buffer.getNextChar();
+		char caractere;
+		lexema = new StringBuilder();
+		do{
+			 caractere = buffer.getNextChar();
+		}while(Character.isWhitespace(caractere));
+		
 		lexema.append(caractere);
 		linha = buffer.getLine();
 		coluna = buffer.getColumn();
@@ -55,9 +59,6 @@ public class AnLexico {
 			tk = this.tokenId();
 		} else if (Util.isDigit(caractere)) {
 			tk = this.tokenNumInt();
-		} else if ((Character.isWhitespace(caractere))) {
-			lexema = new StringBuilder();
-			tk = this.processa();
 		} else {
 			switch (caractere) {
 			case ':':
@@ -70,50 +71,39 @@ public class AnLexico {
 					buffer.rollbackChar();
 					tk = this.tokenAttribOp();
 				}
-				lexema = new StringBuilder();
 				break;
 			case '$':
 				tk = this.tokenRelOp();
-				lexema = new StringBuilder();
 				break;
 			case '\'':
 				tk = this.tokenLiteral();
-				lexema = new StringBuilder();
 				break;
 			case '+':
 				tk = new Token(this.lexema.toString(), TokenTipo.ADDSUB_OP, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			case '-':
 				tk = new Token(this.lexema.toString(), TokenTipo.ADDSUB_OP, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			case '*':
 				tk = new Token(this.lexema.toString(), TokenTipo.MULTDIV_OP, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			case '/':
 				tk = new Token(this.lexema.toString(), TokenTipo.MULTDIV_OP, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			case ';':
 				tk = new Token(this.lexema.toString(), TokenTipo.TERM, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			case '(':
 				tk = new Token(this.lexema.toString(), TokenTipo.L_PAR, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			case ')':
 				tk = new Token(this.lexema.toString(), TokenTipo.R_PAR, this.linha, this.coluna);
-				this.lexema = new StringBuilder();
 				break;
 			default:
 				ErrorHandler.getInstance().gravaErro(
 						new Erro("Lexico", this.lexema.toString(), this.linha, this.coluna, "Caractere Inválido!"));
 
 				tk = new Token("Caractere Inválido", TokenTipo.ERROR);
-				this.lexema = new StringBuilder();
 			}
 		}
 		return tk;
