@@ -45,7 +45,7 @@ public class FileLoader {
 		this.buffer.mark(1);
 		int aux = this.buffer.read();
 
-		if (aux == EOF_CHAR && !Util.isDigit(FileLoader.getLastChar()) && !Util.isLetter(FileLoader.getLastChar())) {
+		if (aux == EOF_CHAR && !Util.isDigit(FileLoader.getLastChar()) && !Util.isLetter(FileLoader.getLastChar()) && !Util.isDot(FileLoader.getLastChar())) {
 			throw new EOFException();
 		}
 

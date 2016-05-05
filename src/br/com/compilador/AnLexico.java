@@ -289,33 +289,45 @@ public class AnLexico {
 			this.lexema = new StringBuilder();
 		}
 
+		buffer.rollbackChar();
 		return tkNumInt;
 	}
 
 	private Token tokenNumFloat() throws IOException {
 		Token tkNumFloat = null;
-		char c;
+		char c = buffer.getNextChar();
+		boolean first = false;
+		boolean cient = false;
 		try {
-			while (true) {
+			while (Util.isDigit(c)) {
+				this.lexema.append(c);
 				c = buffer.getNextChar();
-				if (Util.isDigit(c)) {
-					this.lexema.append(c);
-				} else if (!Util.isDigit(c) && Util.isAllNumbersAfterDot(this.lexema) && !Util.isLetter(c)) {
-					tkNumFloat = new Token(this.lexema.toString(), TokenTipo.NUM_FLOAT, this.linha, this.coluna);
-					break;
-				} else if (c == 'e' || c == 'E') {
-					this.lexema.append(c);
-					tkNumFloat = this.tokenNumCientifico(TokenTipo.NUM_FLOAT);
-					break;
-				} else if (!Util.isDigit(c)) {
-					this.lexema.append(c);
-					throw new EOFException();
-				}
+				first = true;
 			}
+			if (Character.isWhitespace(c) && !first) {
+				throw new EOFException();
+			}
+			if (!Util.isDigit(c) && c != 'e' && c != 'E' && !first) {
+				if (!Character.isWhitespace(c)) {
+					this.lexema.append(c);
+				}
+				throw new EOFException();
+			}
+			if (c == 'e' || c == 'E') {
+				this.lexema.append(c);
+				tkNumFloat = this.tokenNumCientifico(TokenTipo.NUM_FLOAT);
+				cient = true;
+			}
+
 		} catch (EOFException e) {
 			ErrorHandler.getInstance().gravaErro(new Erro("Número Inválido", this.lexema.toString(), this.linha,
 					this.coluna, "Caractere Inválido após o ponto"));
 			tkNumFloat = new Token("Erro", TokenTipo.ERROR);
+			cient = true;
+		}
+
+		if (cient == false) {
+			tkNumFloat = new Token(this.lexema.toString(), TokenTipo.NUM_FLOAT, this.linha, this.coluna);
 		}
 
 		return tkNumFloat;
@@ -333,19 +345,9 @@ public class AnLexico {
 				c = buffer.getNextChar();
 			}
 			if (!Util.isDigit(c) && !firstTime) {
-				while (c != '\r') {
-					this.lexema.append(c);
-					c = buffer.getNextChar();
-					if (Character.isWhitespace(c)) {
-						throw new EOFException();
-					}
-					if (c == '\n') {
-						throw new EOFException();
-					}
-				}
+				this.lexema.append(c);
 				throw new EOFException();
 			}
-
 			while (true) {
 				if (Util.isDigit(c)) {
 					this.lexema.append(c);
