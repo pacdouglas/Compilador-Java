@@ -41,6 +41,7 @@ public class Util {
 		char[] c = s.toCharArray();
 		int dot = 0;
 		boolean verif = true;
+		boolean entrou = false;
 		for (int i = 0; i < c.length; i++) {
 			if (c[i] == '.') {
 				dot = i;
@@ -50,7 +51,12 @@ public class Util {
 		for (int i = dot + 1; i < c.length; i++) {
 			if ((!Util.isDigit(c[i]))) {
 				verif = false;
+				entrou = true;
 			}
+		}
+
+		if (entrou == false) {
+			verif = false;
 		}
 		return verif;
 	}

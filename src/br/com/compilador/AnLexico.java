@@ -47,10 +47,10 @@ public class AnLexico {
 		Token tk = null;
 		char caractere;
 		lexema = new StringBuilder();
-		do{
-			 caractere = buffer.getNextChar();
-		}while(Character.isWhitespace(caractere));
-		
+		do {
+			caractere = buffer.getNextChar();
+		} while (Character.isWhitespace(caractere));
+
 		lexema.append(caractere);
 		linha = buffer.getLine();
 		coluna = buffer.getColumn();
@@ -309,10 +309,7 @@ public class AnLexico {
 					break;
 				} else if (!Util.isDigit(c)) {
 					this.lexema.append(c);
-					if (c == '\n' || c == '\r' || Character.isWhitespace(c)) {
-						this.lexema.delete(this.lexema.length() - 1, this.lexema.length());
-						throw new EOFException();
-					}
+					throw new EOFException();
 				}
 			}
 		} catch (EOFException e) {
@@ -330,7 +327,7 @@ public class AnLexico {
 		boolean firstTime = true;
 		try {
 			c = buffer.getNextChar();
-			if (c == '+') {
+			if (c == '+' || c == '-') {
 				this.lexema.append(c);
 				firstTime = false;
 				c = buffer.getNextChar();
