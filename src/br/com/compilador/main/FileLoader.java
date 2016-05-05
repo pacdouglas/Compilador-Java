@@ -54,7 +54,7 @@ public class FileLoader {
 		this.controlLineColumn(result);
 
 		FileLoader.setLastChar(result);
-
+		
 		return result;
 	}
 

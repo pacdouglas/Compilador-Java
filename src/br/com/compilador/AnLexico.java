@@ -110,7 +110,9 @@ public class AnLexico {
 	}
 
 	private void descartaComentario() throws IOException {
-		char c;
+		char c, eof;
+		int EOFint = -1;
+		eof = (char) EOFint;
 		while (true) {
 			c = buffer.getNextChar();
 			lexema.append(c);
@@ -120,18 +122,12 @@ public class AnLexico {
 				if (c == ':') {
 					lexema.append(c);
 					break;
-				} else {
-					while (c != '\r') {
-						c = buffer.getNextChar();
-						if (Character.isWhitespace(c)) {
-							break;
-						}
-						lexema.append(c);
-					}
-					ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha,
-							this.coluna, "Fechamento Inválido do Comentário. Aguardando ]:"));
-					break;
-				}
+				} 
+			}
+			if(c==eof) {
+				ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha,
+						this.coluna, "Fechamento Inválido do Comentário. Aguardando ]:"));
+				break;
 			}
 		}
 	}
@@ -289,7 +285,6 @@ public class AnLexico {
 			this.lexema = new StringBuilder();
 		}
 
-		buffer.rollbackChar();
 		return tkNumInt;
 	}
 
@@ -307,8 +302,8 @@ public class AnLexico {
 			if (Character.isWhitespace(c) && !first) {
 				throw new EOFException();
 			}
-			if (!Util.isDigit(c) && c != 'e' && c != 'E' && !first) {
-				if (!Character.isWhitespace(c)) {
+			if ((!Util.isDigit(c) && c != 'e' && c != 'E' && !first) || ((c == 'e' || c == 'E') && first == false)) {
+				if (Util.isLetter(c) || Util.isDot(c) || Util.isDollar(c) || Util.isQuote(c)) {
 					this.lexema.append(c);
 				}
 				throw new EOFException();
@@ -328,8 +323,8 @@ public class AnLexico {
 
 		if (cient == false) {
 			tkNumFloat = new Token(this.lexema.toString(), TokenTipo.NUM_FLOAT, this.linha, this.coluna);
+			buffer.rollbackChar();
 		}
-
 		return tkNumFloat;
 	}
 
@@ -345,7 +340,9 @@ public class AnLexico {
 				c = buffer.getNextChar();
 			}
 			if (!Util.isDigit(c) && !firstTime) {
-				this.lexema.append(c);
+				if (Util.isLetter(c) || Util.isDot(c) || Util.isDollar(c) || Util.isQuote(c)) {
+					this.lexema.append(c);
+				}
 				throw new EOFException();
 			}
 			while (true) {
@@ -362,7 +359,7 @@ public class AnLexico {
 					this.coluna, "Caractere Inválido após o E"));
 			tkNumCientifico = new Token("Erro", TokenTipo.ERROR);
 		}
-
+		buffer.rollbackChar();
 		return tkNumCientifico;
 	}
 
