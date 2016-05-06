@@ -122,11 +122,12 @@ public class AnLexico {
 				if (c == ':') {
 					lexema.append(c);
 					break;
-				} 
+				}
 			}
-			if(c==eof) {
-				ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha,
-						this.coluna, "Fechamento Inválido do Comentário. Aguardando ]:"));
+			if (c == eof) {
+				this.lexema.delete(lexema.length() - 1, lexema.length());
+				ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna,
+						"Fechamento Inválido do Comentário. Aguardando ]:"));
 				break;
 			}
 		}
@@ -143,9 +144,6 @@ public class AnLexico {
 				if (c == '\'') {
 					tkLiteral = new Token(this.lexema.toString(), TokenTipo.LITERAL, this.linha, this.coluna);
 					achou = true;
-					break;
-				}
-				if (c == '\r' || c == '\n') {
 					break;
 				}
 			}
@@ -224,13 +222,8 @@ public class AnLexico {
 		}
 
 		if (validar == false) {
-			while (c != '\r') {
+			if (!Character.isWhitespace(c))
 				this.lexema.append(c);
-				c = buffer.getNextChar();
-				if (Character.isWhitespace(c)) {
-					break;
-				}
-			}
 			ErrorHandler.getInstance().gravaErro(new Erro("Léxico", this.lexema.toString(), this.linha, this.coluna,
 					"Operador Relacional Inválido"));
 			tkRelOp = new Token("Error", TokenTipo.ERROR);

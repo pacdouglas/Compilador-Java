@@ -45,7 +45,9 @@ public class FileLoader {
 		this.buffer.mark(1);
 		int aux = this.buffer.read();
 
-		if (aux == EOF_CHAR && !Util.isDigit(FileLoader.getLastChar()) && !Util.isLetter(FileLoader.getLastChar()) && !Util.isDot(FileLoader.getLastChar())) {
+		if (aux == EOF_CHAR && !Util.isDigit(FileLoader.getLastChar()) && !Util.isLetter(FileLoader.getLastChar())
+				&& !Util.isDot(FileLoader.getLastChar()) && lastChar != '\n' && lastChar != '\r'
+				&& !Character.isWhitespace(lastChar)) {
 			throw new EOFException();
 		}
 
@@ -54,7 +56,7 @@ public class FileLoader {
 		this.controlLineColumn(result);
 
 		FileLoader.setLastChar(result);
-		
+
 		return result;
 	}
 

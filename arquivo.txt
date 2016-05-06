@@ -1,13 +1,82 @@
+:[Testes dos Lexemas Propostos]:
+
+:[Coment]:
+123
+48
+3E+10
+4.8
+3.10E+10 
+'Carlos'
+:[Coment]:
+'Batata'
+val
+_salario
+i__
+
+:[Coment]:
+$df$
+:[Coment]:
+$gt$
+$le$
++-*/
+:=
+; :[Coment]:
+():[Coment]:
+true false and not or bool text int program end_prog begin end if then else for while declare to
+
 90.10E-10
 90.182e+1
+
+:[Teste Erros]:
+
 90.
-:[coment]:
 90.09E-
 3E+asd15d
-90.ebanana
-:[coment]:
+'bata 
+ta
+car
+los'
 a:=10.45+b
-:[coment
-asodhas
-a9919919191298 
-banana
+$blablabla123$
+$galocha$
+
+:[Teste Codigo]:
+
+program
+
+declare i := 1;
+declare _e := 1e+10;
+declare e_float := 1.5;
+declare literal := 'joao';
+
+declare sum := i + e_float;
+declare sub := i - e_float;
+:[Coment]:
+declare mult := i * e_float;
+declare div := (i / e_float) / 10;
+
+while (true) begin
+
+	for (declare b := 0; b $lt$ 10 or b $gt$ -5) begin
+		if (b $le$ 10) 
+			begin 
+			  i := 50;
+			  b := b + 1;
+			end 
+		else 
+			begin 
+				i := 1e+10;
+				b := b + 2;
+			end
+	end
+	:[Coment]:
+end
+
+end_prog
+
+:[Teste de Comentário não fechado]:
+
+:[Coment
+declare mult := i * e_float;
+declare div := (i / e_float) / 10;
+batata
