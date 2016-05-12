@@ -26,7 +26,6 @@ import java.io.IOException;
 public class AnSintatico {
 	AnLexico anLexico;
 	private Token token;
-
 	public AnSintatico(String path) throws IOException {
 		anLexico = new AnLexico(path);
 	}

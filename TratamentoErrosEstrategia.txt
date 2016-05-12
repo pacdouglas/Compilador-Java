@@ -1,0 +1,27 @@
+﻿Tratamento de Erros (Estratégia):
+
+1. Marcar como "Sinc" os símbolos em Follow(A), na linha A da TSP 
+
+2. Processamento para A (primeiro token da função):
+ a. Ler lookahead: x
+
+ b. Se TSP[A,x] for indefinido
+
+    i.   Registrar erro
+
+    ii.  Pular x
+
+    iii. Ler próximo token y
+
+    iv.  Se TSP[A,y] for indefinido, voltar para ii
+
+    v.   Senão se, y estiver em First(A), continuar o processamento
+    (esta regra não deve ser usada, em geral, apenas em casos específicos e quando for o processamento do 1o token)
+
+    vi.  Senão, se y estiver em Follow(A) (Sinc), 
+	     - Devolve y para o Léxico
+	     - Retornar função A
+
+3. Se um erro ocorrer no meio do processamento de uma regra, aplicar o algoritmo a partir do passo 2.b
+
+4. Procurar oportunidades de melhorar o tratamento. Analisar o tipo de token de sincronização, se ele pode ocorrer após o erro, mas ainda dentro da expressão, etc.
