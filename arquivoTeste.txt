@@ -1,0 +1,38 @@
+program testaCompilador;
+
+	begin
+		declare b int;
+		declare a int;
+		declare b int;
+		declare div float;
+		declare mult int;
+		declare i int;
+		
+		varNaoDeclarada := a * b;
+		
+		b := i - a;
+		
+		a := 5 + b;
+		mult := i * b;
+		
+	
+			:[Comentário]:
+			for i := 0 to 99 
+				if (b $le$ 10) then
+					begin 
+						:[Comentário]:
+					  a := b + 1;
+					  div := 66;
+					end 
+				else 
+					begin 
+						i := 1e+10;
+						b := b + 2;
+					end
+					
+		div := (i / b) / 10;
+		
+    end
+    
+	
+end_prog;

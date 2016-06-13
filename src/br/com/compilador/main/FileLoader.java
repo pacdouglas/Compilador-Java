@@ -12,15 +12,7 @@ import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import br.com.compilador.Util;
-
-/*
- *  classe usada pelo AnLexico, 
- *  responsável pela leitura do arquivo de entrada. 
- *  Possui métodos para a leitura de caracteres e controle posicional 
- * 
- */
+import br.com.compilador.utils.Util;
 
 public class FileLoader {
 	public BufferedReader buffer;
@@ -45,8 +37,8 @@ public class FileLoader {
 		this.buffer.mark(1);
 		int aux = this.buffer.read();
 
-		if (aux == EOF_CHAR && !Util.isDigit(FileLoader.getLastChar()) && !Util.isLetter(FileLoader.getLastChar())
-				&& !Util.isDot(FileLoader.getLastChar()) && lastChar != '\n' && lastChar != '\r'
+		if (aux == EOF_CHAR && !Util.ehDigito(FileLoader.getLastChar()) && !Util.ehLetra(FileLoader.getLastChar())
+				&& !Util.ehPonto(FileLoader.getLastChar()) && lastChar != '\n' && lastChar != '\r'
 				&& !Character.isWhitespace(lastChar)) {
 			throw new EOFException();
 		}

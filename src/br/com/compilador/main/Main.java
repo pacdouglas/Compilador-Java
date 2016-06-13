@@ -11,23 +11,15 @@ package br.com.compilador.main;
 
 import java.io.IOException;
 
-import br.com.compilador.AnSintatico;
-import br.com.compilador.ErrorHandler;
-import br.com.compilador.TabSimbolos;
+import br.com.compilador.analisadores.Sintatico;
 
 public class Main {
 
-	private static AnSintatico anSintatico;
+	private static Sintatico analisadorSintatico;
 
 	public static void main(String[] args) throws IOException {
-		anSintatico = new AnSintatico("arquivo.txt");
-
-		anSintatico.executar();
-
-		ErrorHandler.getInstance().printErros();
-
-		TabSimbolos.getInstance().printToken();
-		System.out.println("Fim");
+		analisadorSintatico = new Sintatico("arquivoTeste.txt");
+		analisadorSintatico.executar();
 	}
 
 }
